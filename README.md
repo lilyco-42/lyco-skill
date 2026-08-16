@@ -25,12 +25,25 @@
 
 ## 安装
 
+### Windows（PowerShell 原生，无 bash 依赖）
+
+```powershell
+# 一行安装（推荐）
+iex (irm https://raw.githubusercontent.com/lilyco-42/lyco-skill/main/install.ps1)
+
+# 装到所有 agent（60+，需 node/npm）
+iex (irm https://raw.githubusercontent.com/lilyco-42/lyco-skill/main/install.ps1) ; powershell -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/lilyco-42/lyco-skill/main/install.ps1 -OutFile $env:TEMP\lyco-install.ps1; & $env:TEMP\lyco-install.ps1 -AllAgents"
+```
+
+> 注意：`bash <(...)` 进程替换语法在 Windows 原生终端不可用，Windows 请用上面的 PowerShell 命令。
+
+### Linux / macOS（bash）
+
 ```bash
-# 一键安装（推荐）：Linux / macOS / Windows(Git Bash / WSL / Termux)
+# 一键安装
 bash <(curl -fsSL https://raw.githubusercontent.com/lilyco-42/lyco-skill/main/install.sh)
 
-# 全支持模式：装到所有 agent（Codex / Gemini CLI / Copilot / Cursor / Claude Code / Qwen 等 60+）
-# 内部使用 vercel-labs/skills CLI：universal 目录 ~/.agents/skills + 各 agent junction 链接
+# 全支持模式：装到所有 agent（内部用 vercel-labs/skills CLI）
 bash <(curl -fsSL https://raw.githubusercontent.com/lilyco-42/lyco-skill/main/install.sh) --all-agents
 
 # 手动：克隆到全局技能目录（universal agents 原生读取）
