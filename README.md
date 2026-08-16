@@ -1,4 +1,4 @@
-# oma-preflight
+# lyco
 
 项目预研先行（Research Before Building）—— 写任何代码之前，先钉需求、搜现成方案、挖论坛冷门知识、做 build-vs-buy 决策，最后用 ≤12 行简短汇报收尾。
 
@@ -27,10 +27,10 @@
 
 ```bash
 # 方式一：直接复制到全局技能目录
-cp -r oma-preflight ~/.agents/skills/
+cp -r lyco ~/.agents/skills/
 
 # 方式二：从仓库拉取
-git clone https://github.com/lilyco-42/oma-preflight.git ~/.agents/skills/oma-preflight
+git clone https://github.com/lilyco-42/lyco.git ~/.agents/skills/lyco
 ```
 
 要求：`gh` CLI 已认证（`gh auth status`），可选 `jq`。论坛知识用 web search 的 `site:` 过滤获取，只读不爬墙内内容。
@@ -38,7 +38,7 @@ git clone https://github.com/lilyco-42/oma-preflight.git ~/.agents/skills/oma-pr
 ## 文件结构
 
 ```
-oma-preflight/
+lyco/
 ├── SKILL.md                        # 技能主体：Scheduling / Structural Flow / Logical Operations / References
 └── resources/
     └── preflight-search.md         # gh 命令速查、同义词扩展规则、论坛站点清单、build-vs-buy 矩阵
