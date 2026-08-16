@@ -1,66 +1,76 @@
 #!/usr/bin/env bash
-# lyco skill 一键安装脚本
-# 用法: bash install.sh [目标目录]
-#   默认目标: ~/.agents/skills/lyco
-#   支持: Linux / macOS / Windows(Git Bash / WSL / Termux)
+# lyco skill 一键安装脚本 — 支持多 agent 环境
+# 用法: bash install.sh [dsh|opencode|claude|all]   (默认 all)
+#   dsh     -> ~/.agents/skills/lyco
+#   opencode-> ~/.config/opencode/skills/lyco
+#   claude  -> ~/.claude/skills/lyco
+# 支持: Linux / macOS / Windows(Git Bash / WSL / Termux)
 set -euo pipefail
 
 SKILL_NAME="lyco"
-REPO="https://github.com/lilyco-42/lyco-skill.git"
-TARGET="${1:-$HOME/.agents/skills/$SKILL_NAME}"
+REPO_URL="https://github.com/lilyco-42/lyco-skill.git"
+TARBALL_URL="https://github.com/lilyco-42/lyco-skill/archive/refs/heads/main.tar.gz"
 
-info()  { printf '\033[32m[lyco]\033[0m %s\n' "$*"; }
-warn()  { printf '\033[33m[lyco]\033[0m %s\n' "$*" >&2; }
-die()   { printf '\033[31m[lyco] 失败: %s\033[0m\n' "$*" >&2; exit 1; }
+declare -A TARGETS=(
+  [dsh]="$HOME/.agents/skills/$SKILL_NAME"
+  [opencode]="$HOME/.config/opencode/skills/$SKILL_NAME"
+  [claude]="$HOME/.claude/skills/$SKILL_NAME"
+)
 
-# 目标目录已存在 → 检查是否为已装技能，是则 git pull 更新
-install_via_git() {
-    info "git 可用，开始克隆 $REPO"
-    if [[ -d "$TARGET/.git" ]]; then
-        info "检测到已安装，git pull 更新..."
-        git -C "$TARGET" pull --ff-only || warn "git pull 失败，保留现有内容"
+info() { printf '\033[32m[lyco]\033[0m %s\n' "$*"; }
+warn() { printf '\033[33m[lyco]\033[0m %s\n' "$*" >&2; }
+die()  { printf '\033[31m[lyco] 失败: %s\033[0m\n' "$*" >&2; exit 1; }
+
+# --- 下载源技能到临时目录 ---
+fetch_src() {
+    local src; src="$(mktemp -d)"
+    if command -v git >/dev/null 2>&1; then
+        git clone --depth 1 "$REPO_URL" "$src/repo" >/dev/null 2>&1 \
+            || die "git clone 失败，请检查网络/代理"
+        mv "$src/repo" "$src/skill"
+    elif command -v curl >/dev/null 2>&1; then
+        curl -fsSL "$TARBALL_URL" -o "$src/lyco.tar.gz" || die "tarball 下载失败"
+        tar -xzf "$src/lyco.tar.gz" -C "$src"
+        mv "$src/lyco-skill-main" "$src/skill"
     else
-        git clone --depth 1 "$REPO" "$TARGET" || die "克隆失败，请检查网络/代理"
+        die "既没有 git 也没有 curl，无法安装"
     fi
+    # 只取技能本体（SKILL.md + resources），不带 README/install.sh
+    mkdir -p "$src/body"
+    cp -r "$src/skill/SKILL.md" "$src/body/"
+    [[ -d "$src/skill/resources" ]] && cp -r "$src/skill/resources" "$src/body/"
+    printf '%s' "$src/body"
 }
 
-install_via_curl() {
-    info "git 不可用，改用 tarball 下载..."
-    command -v curl >/dev/null 2>&1 || die "既没有 git 也没有 curl，无法安装"
-    local tmp; tmp="$(mktemp -d)"
-    curl -fsSL "https://github.com/lilyco-42/lyco-skill/archive/refs/heads/main.tar.gz" \
-        -o "$tmp/lyco.tar.gz" || die "下载失败"
-    mkdir -p "$TARGET"
-    tar -xzf "$tmp/lyco.tar.gz" -C "$tmp"
-    # tarball 解出来是 lyco-skill-main/，把内容平铺进目标
-    cp -r "$tmp"/lyco-skill-main/. "$TARGET/"
-    rm -rf "$tmp"
+# --- 安装到单个目标（覆盖式同步） ---
+install_one() {
+    local agent="$1" target="$2" src="$3"
+    mkdir -p "$(dirname "$target")"
+    rm -rf "$target"
+    cp -r "$src" "$target"
+    if [[ -f "$target/SKILL.md" ]] && grep -q "^name: $SKILL_NAME$" "$target/SKILL.md"; then
+        info "✓ $agent -> $target (校验通过)"
+    else
+        warn "✗ $agent -> $target (SKILL.md 校验失败)"
+    fi
 }
 
 # --- 主流程 ---
-if [[ -e "$TARGET/SKILL.md" ]]; then
-    if command -v git >/dev/null 2>&1 && [[ -d "$TARGET/.git" ]]; then
-        install_via_git
-    else
-        info "目标已存在且非 git 克隆，跳过覆盖（如需强制更新请先手动删除 $TARGET）"
-    fi
-else
-    if command -v git >/dev/null 2>&1; then
-        install_via_git
-    else
-        install_via_curl
-    fi
-fi
+AGENT="${1:-all}"
+SRC="$(fetch_src)"
 
-# 校验 frontmatter name 与目录名一致（Agent Skills 规范）
-if [[ -f "$TARGET/SKILL.md" ]]; then
-    if grep -q "^name: $SKILL_NAME$" "$TARGET/SKILL.md"; then
-        info "校验通过: name: $SKILL_NAME == 目录名 $(basename "$TARGET")"
-    else
-        warn "SKILL.md 的 frontmatter name 不是 $SKILL_NAME，请检查"
-    fi
-    info "安装完成: $TARGET"
-    info "重启 agent 会话后可用 /$SKILL_NAME 调用"
-else
-    die "未找到 SKILL.md，安装不完整"
-fi
+case "$AGENT" in
+    dsh)     install_one dsh     "${TARGETS[dsh]}"     "$SRC" ;;
+    opencode) install_one opencode "${TARGETS[opencode]}" "$SRC" ;;
+    claude)  install_one claude  "${TARGETS[claude]}"  "$SRC" ;;
+    all)
+        for agent in dsh opencode claude; do
+            install_one "$agent" "${TARGETS[$agent]}" "$SRC"
+        done
+        ;;
+    *) die "未知目标: $AGENT (可选 dsh / opencode / claude / all)" ;;
+esac
+
+rm -rf "$(dirname "$SRC")"
+info "完成。各 agent 重启会话后可用 /$SKILL_NAME 调用"
+info "dsh: 装于 ~/.agents/skills ; opencode: 自动发现 ~/.agents/skills 或 ~/.config/opencode/skills ; claude code: ~/.claude/skills"
