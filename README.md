@@ -26,11 +26,14 @@
 ## 安装
 
 ```bash
-# 方式一：直接复制到全局技能目录
-cp -r lyco ~/.agents/skills/
+# 一键安装（推荐）：Linux / macOS / Windows(Git Bash / WSL / Termux)
+bash <(curl -fsSL https://raw.githubusercontent.com/lilyco-42/lyco-skill/main/install.sh)
 
-# 方式二：从仓库拉取
-git clone https://github.com/lilyco-42/lyco.git ~/.agents/skills/lyco
+# 指定目标目录
+bash <(curl -fsSL https://raw.githubusercontent.com/lilyco-42/lyco-skill/main/install.sh) ~/custom/skills
+
+# 手动：克隆到全局技能目录
+git clone https://github.com/lilyco-42/lyco-skill.git ~/.agents/skills/lyco
 ```
 
 要求：`gh` CLI 已认证（`gh auth status`），可选 `jq`。论坛知识用 web search 的 `site:` 过滤获取，只读不爬墙内内容。
