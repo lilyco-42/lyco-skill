@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
-# lyco skill 一键安装脚本 — 支持多 agent 环境
-# 用法: bash install.sh [dsh|opencode|claude|all]   (默认 all)
-#   dsh     -> ~/.agents/skills/lyco
-#   opencode-> ~/.config/opencode/skills/lyco
-#   claude  -> ~/.claude/skills/lyco
+# lyco skill 一键安装脚本
+# 用法:
+#   bash install.sh [dsh|opencode|claude]   # 单装（默认 all: 三个主环境）
+#   bash install.sh --all-agents            # 全支持: 用 skills CLI (vercel-labs) 装到 60+ agent
 # 支持: Linux / macOS / Windows(Git Bash / WSL / Termux)
 set -euo pipefail
 
@@ -57,6 +56,22 @@ install_one() {
 
 # --- 主流程 ---
 AGENT="${1:-all}"
+
+# 全支持模式：用 vercel-labs/skills CLI 装到所有 agent（universal 目录 + 各 agent junction）
+if [[ "$AGENT" == "--all-agents" ]]; then
+    if command -v skills >/dev/null 2>&1; then
+        skills add lilyco-42/lyco-skill --global --agent '*' --yes
+        info "已装到所有支持的 agent。"
+        info "更新: skills update lyco -g ; 卸载: skills remove lyco --global --agent '*' --yes"
+        exit 0
+    else
+        info "未检测到 skills CLI，先安装: npm install -g skills"
+        npm install -g skills
+        skills add lilyco-42/lyco-skill --global --agent '*' --yes
+        exit 0
+    fi
+fi
+
 SRC="$(fetch_src)"
 
 case "$AGENT" in

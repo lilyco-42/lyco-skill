@@ -29,12 +29,19 @@
 # 一键安装（推荐）：Linux / macOS / Windows(Git Bash / WSL / Termux)
 bash <(curl -fsSL https://raw.githubusercontent.com/lilyco-42/lyco-skill/main/install.sh)
 
-# 指定目标目录
-bash <(curl -fsSL https://raw.githubusercontent.com/lilyco-42/lyco-skill/main/install.sh) ~/custom/skills
+# 全支持模式：装到所有 agent（Codex / Gemini CLI / Copilot / Cursor / Claude Code / Qwen 等 60+）
+# 内部使用 vercel-labs/skills CLI：universal 目录 ~/.agents/skills + 各 agent junction 链接
+bash <(curl -fsSL https://raw.githubusercontent.com/lilyco-42/lyco-skill/main/install.sh) --all-agents
 
-# 手动：克隆到全局技能目录
+# 手动：克隆到全局技能目录（universal agents 原生读取）
 git clone https://github.com/lilyco-42/lyco-skill.git ~/.agents/skills/lyco
 ```
+
+**全支持原理**（Agent Skills 生态，[spec-weave 分析](https://spec-weave.com/docs/guides/agent-skills-extensibility-analysis/)）：
+
+- **Universal agents**（Codex / Gemini CLI / GitHub Copilot / OpenCode / Kimi / Amp / Replit）原生读取 `~/.agents/skills/`——装一次即全通，无需链接
+- **其余 30+ agent**（Claude Code / Cursor / Windsurf / Qwen / Cline / Roo 等）各读自己的目录，由 `skills` CLI 从 canonical 源建 junction/symlink 打通
+- 更新技能只需改 `~/.agents/skills/lyco` 一处，所有 agent 同步生效
 
 要求：`gh` CLI 已认证（`gh auth status`），可选 `jq`。论坛知识用 web search 的 `site:` 过滤获取，只读不爬墙内内容。
 
