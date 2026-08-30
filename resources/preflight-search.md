@@ -79,3 +79,17 @@ are safe defaults. A license mismatch is a legitimate hard constraint for self-b
 决策: adopt / fork / build — <one-line evidence>
 下一步: <one concrete action>
 ```
+
+## 6. OODA/TDOO 军事指导速查
+
+Run the same ACQUIRE/REASON commands, but frame each phase as an OODA stage:
+
+| OODA 阶段 | lyco 阶段 | 命令/产出 |
+|-----------|-----------|-----------|
+| Observe | ACQUIRE | `gh search repos "TERM"` / `gh api "search/code?q=TERM"` — collect facts, signals, unknowns |
+| Orient | REASON | `gh repo view owner/repo` — map patterns, gaps, ≥2 hypotheses |
+| Decide | DECIDE | build-vs-buy matrix (section 4) — pick one option with cost + acceptance |
+| Act | ACT | `gh repo clone owner/repo` or minimal scaffold — verify with a feedback point |
+| Re-observe | VERIFY | compare result vs prediction; decide next round |
+
+Full prompt template and military workflow: `resources/ooda-guidance.md`.

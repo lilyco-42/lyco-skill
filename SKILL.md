@@ -8,6 +8,9 @@ description: >
   build vs buy (自研 vs 用现成). Use when starting a new project, 项目预研, 方案调研,
   可行性分析, 找相似项目/现成方案, 要不要自己造轮子, 评估主流方案, requirement
   clarification, 前沿探索/无人之境调研, 深度研究, or build-vs-buy decisions.
+  Also use for OODA/TDOO 军事指导: run project research as a closed Observe-Orient-
+  Decide-Act loop ("观察-分析-进攻"), where each lyco preflight phase is an OODA
+  stage and verification feeds the next round.
 ---
 
 # lyco — 预研先行 (Research Before Building)
@@ -33,6 +36,10 @@ description: >
    不懂一个东西的实现，就写最小化实现，慢慢模块化拼接、由简入繁。
    相信**原子化构建** —— 复杂的人体也是由基本粒子组成。
 
+项目预研本身就是一条 **OODA（Observe-Orient-Decide-Act）闭环**：先用 gh 搜索
+“观察”现状，再评估候选“判断”态势，选定 build-vs-buy“决策”，最后克隆/最小化验证
+“行动”，用验证结果驱动下一轮循环（军事化表达：观察、分析、进攻）。
+
 ### Intent signature
 - "开始一个新项目 / 帮我做个 X" where X is underspecified
 - "有没有现成的方案 / 找找类似的项目 / github 上有没有人做过"
@@ -41,6 +48,8 @@ description: >
 - "这个功能文档里没写，去论坛查查 / 吾爱破解 / reddit 上怎么说"
 - "这个方向是不是没人做过 / 无人之境 / 前沿探索 / 深度研究"
 - Requirement-first phrasing: "我想做 X，先别写代码，先搞清楚需求"
+- OODA / TDOO / 军事指导 phrasing: "用 OODA 走一遍" / "观察-分析-进攻" /
+  "侦察-研判-决策-进攻" / "军事化决策流程"
 
 ### When to use
 - Starting a greenfield project, feature, or tool — before scaffolding anything
@@ -48,6 +57,7 @@ description: >
 - Gathering niche/pitfall knowledge that official docs do not cover
 - The user's request is vague enough that implementing immediately risks wasted work
 - 探索未知/前沿方向时（怀疑不可行 → 先调研 → 最小化验证）
+- 用户要 OODA/TDOO 军事指导，或希望用“观察-分析-进攻”闭环驱动调研与决策
 
 ### When NOT to use
 - Requirement is already crisp AND the solution is already chosen -> skip to the
@@ -132,6 +142,40 @@ description: >
 8. **FINALIZE**: Deliver the short bullet report: requirement / candidates / niche
    knowledge / decision / next action. ≤ 12 lines of substance.
 
+### OODA 军事指导融合 (TDOO Workflow)
+
+当用户提到 **OODA / TDOO / 军事指导 / 观察-分析-进攻 / 侦察-研判-决策** 时，
+切换到军事指导模式：把 lyco 的预研流程当作一条作战闭环来跑。
+
+**阶段映射**
+
+| lyco 阶段 | OODA 阶段 | 军事动作 | 核心动作 |
+|-----------|-----------|----------|----------|
+| ACQUIRE（gh 搜索 + 论坛调研） | Observe 观察 | 侦察/情报收集 | 感知现状，只记录事实与信号，不预设立场 |
+| REASON（候选评估 + 根因分析） | Orient 判断 | 态势研判 | 结合上下文理解信息，识别模式、差距与假设 |
+| DECIDE（build-vs-buy 决策） | Decide 决策 | 选择作战方案 | 给出 ≥2 个方案，选一个并说明理由与代价 |
+| ACT（克隆 / 最小化验证） | Act 进攻/行动 | 执行打击 | 跑最小验证，带验证点与回退路径 |
+| VERIFY → 下一轮 ACQUIRE | Re-observe 反馈 | 战果评估 | 用验证结果驱动下一轮，形成闭环 |
+
+**循环核心（军事版）**：唯快不破 —— 比对手更快完成一轮循环；可逆动作
+先求 70% 置信度就行动，不追求 100%；行动后必须重新观察，不能停在“好像完成了”。
+
+**每轮输出（军事版核心提示词）**
+
+```text
+Observe 侦察: 当前状态（只列事实）/ 信号与未知 / 已用的 gh 与 forum 检索
+Orient 研判: 根因或差距 / 相似先例 / ≥2 个备选解释
+Decide 决策: 方案 A/B + 理由 / 选哪个 + 置信度与代价 / 验收标准
+Act 进攻: 最小动作 / 立即验证点 / 回退路径
+Re-observe 复盘: 结果对比 / 下一轮触发条件（继续 or 关闭）
+```
+
+**循环规则**：
+- 一轮 = ACQUIRE(Observe) → REASON(Orient) → DECIDE → ACT → VERIFY。
+- 验证未达验收标准 → 自动进入下一轮，从新的事实重新观察，不修旧结论。
+- 可逆动作以 70% 置信度执行；不可逆或高风险动作必须等用户确认。
+- 完整提示词模板与检索速查见 `resources/ooda-guidance.md`。
+
 ### Transitions
 - If the user starts dictating implementation details before the requirement is agreed,
   stop and re-confirm the one-line requirement first.
@@ -213,6 +257,9 @@ description: >
    claim has a source; deliver ≤ 12-line bullet report (requirement / candidates /
    niche knowledge / decision / next action).
 
+OODA/TDOO 模式下，步骤 2-8 即一轮循环：ACQUIRE=Observe，REASON=Orient，
+DECIDE 与 ACT 同义，VERIFY=Re-observe 并决定是否开启下一轮。
+
 ### Resource scope
 | Scope | Resource target |
 |-------|-----------------|
@@ -262,5 +309,7 @@ description: >
 ## References
 - Command reference, synonym expansion rules, forum site list, fit matrix:
   `resources/preflight-search.md`
+- OODA/TDOO 军事指导：阶段映射、核心提示词模板、检索速查：
+  `resources/ooda-guidance.md`
 - 五条核心信条（用户方法论）：同类经验汲取 / 理解用户 / 评估可行性 /
   探索无人之境 / 深度研究（最小化验证 + 原子化构建）
