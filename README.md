@@ -67,8 +67,9 @@ git clone https://github.com/lilyco-42/lyco-skill.git ~/.agents/skills/lyco
 lyco/
 ├── SKILL.md                        # 技能主体：Scheduling / Structural Flow / Logical Operations / References
 └── resources/
-    └── preflight-search.md         # gh 命令速查、同义词扩展规则、论坛站点清单、build-vs-buy 矩阵
-    └── ooda-guidance.md            # OODA 军事指导提示词模板、阶段映射、检索速查
+    ├── preflight-search.md         # gh 命令速查、同义词扩展规则、论坛站点清单、build-vs-buy 矩阵
+    ├── ooda-guidance.md            # OODA 军事指导提示词模板、阶段映射、检索速查
+    └── skill-radar.md              # 外部热门技能雷达（资源路由：只引用不吸收，专项能力按需 npx skills add）
 ```
 
 ## 设计原则

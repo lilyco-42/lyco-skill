@@ -91,6 +91,8 @@ description: >
 - Optional: `jq` for parsing gh/curl JSON
 - Optional: Obsidian vault（无人之境调研时整理知识图谱用）
 - DSH goal tools for long-running preflight objectives (create_goal/get_goal/update_goal)
+- External skill routing: `resources/skill-radar.md` —— 外部热门技能雷达；
+  需要专项能力时按分类 `npx skills add owner/repo` 引用专门 skill（只路由，不吸收代码）
 
 ### Control-flow features
 - Loop: near-synonym search until evidence converges (2+ credible candidates OR 2
@@ -311,5 +313,7 @@ DECIDE 与 ACT 同义，VERIFY=Re-observe 并决定是否开启下一轮。
   `resources/preflight-search.md`
 - OODA/TDOO 军事指导：阶段映射、核心提示词模板、检索速查：
   `resources/ooda-guidance.md`
+- 外部技能雷达（资源路由，只引用不吸收；专项能力做 build-vs-buy 时查这里）：
+  `resources/skill-radar.md`
 - 五条核心信条（用户方法论）：同类经验汲取 / 理解用户 / 评估可行性 /
   探索无人之境 / 深度研究（最小化验证 + 原子化构建）
