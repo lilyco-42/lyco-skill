@@ -8,7 +8,7 @@ description: >
   build vs buy (自研 vs 用现成). Use when starting a new project, 项目预研, 方案调研,
   可行性分析, 找相似项目/现成方案, 要不要自己造轮子, 评估主流方案, requirement
   clarification, 前沿探索/无人之境调研, 深度研究, or build-vs-buy decisions.
-  Also use for OODA/OORDA/TDOO 军事指导: run project research as a closed Observe-
+  Also use for OODA/OORDA 军事指导: run project research as a closed Observe-
   Orient-ROI-Decide-Act loop ("观察-分析-核算-进攻"), where each lyco preflight
   phase is an OORDA stage and verification feeds the next round.
 ---
@@ -36,9 +36,9 @@ description: >
    不懂一个东西的实现，就写最小化实现，慢慢模块化拼接、由简入繁。
    相信**原子化构建** —— 复杂的人体也是由基本粒子组成。
 
-项目预研本身就是一条 **OODA（Observe-Orient-Decide-Act）闭环**：先用 gh 搜索
-“观察”现状，再评估候选“判断”态势，选定 build-vs-buy“决策”，最后克隆/最小化验证
-“行动”，用验证结果驱动下一轮循环（军事化表达：观察、分析、进攻）。
+项目预研本身就是一条 **OORDA（Observe-Orient-ROI-Decide-Act）闭环**：先用 gh 搜索
+“观察”现状，再评估候选“判断”态势，用 ROI 权衡“核算”投入产出（产出值÷投入本，不过门槛不动工），再选定 build-vs-buy“决策”，最后克隆/最小化验证
+“行动”，用验证结果驱动下一轮循环（军事化表达：观察、分析、核算、进攻）。
 
 ### Intent signature
 - "开始一个新项目 / 帮我做个 X" where X is underspecified
@@ -48,7 +48,7 @@ description: >
 - "这个功能文档里没写，去论坛查查 / 吾爱破解 / reddit 上怎么说"
 - "这个方向是不是没人做过 / 无人之境 / 前沿探索 / 深度研究"
 - Requirement-first phrasing: "我想做 X，先别写代码，先搞清楚需求"
-- OODA / OORDA / TDOO / 军事指导 phrasing: "用 OODA 走一遍" / "观察-分析-进攻" /
+- OODA / OORDA / 军事指导 phrasing: "用 OODA 走一遍" / "观察-分析-进攻" /
   "侦察-研判-核算-决策-进攻" / "军事化决策流程"
 
 ### When to use
@@ -57,7 +57,7 @@ description: >
 - Gathering niche/pitfall knowledge that official docs do not cover
 - The user's request is vague enough that implementing immediately risks wasted work
 - 探索未知/前沿方向时（怀疑不可行 → 先调研 → 最小化验证）
-- 用户要 OODA/TDOO 军事指导，或希望用“观察-分析-进攻”闭环驱动调研与决策
+- 用户要 OODA/OORDA 军事指导，或希望用“观察-分析-核算-进攻”闭环驱动调研与决策
 
 ### When NOT to use
 - Requirement is already crisp AND the solution is already chosen -> skip to the
@@ -144,9 +144,9 @@ description: >
 8. **FINALIZE**: Deliver the short bullet report: requirement / candidates / niche
    knowledge / decision / next action. ≤ 12 lines of substance.
 
-### OODA 军事指导融合 (TDOO Workflow)
+### OORDA 军事指导融合 (Workflow)
 
-当用户提到 **OODA / TDOO / 军事指导 / 观察-分析-进攻 / 侦察-研判-决策** 时，
+当用户提到 **OODA / OORDA / 军事指导 / 观察-分析-进攻 / 侦察-研判-决策** 时，
 切换到军事指导模式：把 lyco 的预研流程当作一条作战闭环来跑。
 
 **阶段映射**
@@ -155,6 +155,7 @@ description: >
 |-----------|-----------|----------|----------|
 | ACQUIRE（gh 搜索 + 论坛调研） | Observe 观察 | 侦察/情报收集 | 感知现状，只记录事实与信号，不预设立场 |
 | REASON（候选评估 + 根因分析） | Orient 判断 | 态势研判 | 结合上下文理解信息，识别模式、差距与假设 |
+| WEIGH（ROI 投入产出评估） | ROI 评估（R） | 战果核算 | 产出值(需求价值/补缺/可复用) ÷ 投入本(工时/风险/验证)；不过门槛→缩方案或换题 |
 | DECIDE（build-vs-buy 决策） | Decide 决策 | 选择作战方案 | 给出 ≥2 个方案，选一个并说明理由与代价 |
 | ACT（克隆 / 最小化验证） | Act 进攻/行动 | 执行打击 | 跑最小验证，带验证点与回退路径 |
 | VERIFY → 下一轮 ACQUIRE | Re-observe 反馈 | 战果评估 | 用验证结果驱动下一轮，形成闭环 |
@@ -174,7 +175,8 @@ Re-observe 复盘: 结果对比 / 下一轮触发条件（继续 or 关闭）
 ```
 
 **循环规则**：
-- 一轮 = ACQUIRE(Observe) → REASON(Orient) → DECIDE → ACT → VERIFY。
+- 一轮 = ACQUIRE(Observe) → REASON(Orient) → WEIGH(ROI) → DECIDE → ACT → VERIFY。
+- **理解门槛（先于一轮）**：若用户的话/提示词没看懂、有歧义或含陌生概念 → 强制两件事缺一不可：① WebFetch/WebSearch 至少搜一次同步信息（目的是弄清用户真实核心需求）；② 直接向用户提问“核心需求是什么”。没搜+没问就动手 = 违规。
 - 验证未达验收标准 → 自动进入下一轮，从新的事实重新观察，不修旧结论。
 - 可逆动作以 70% 置信度执行；不可逆或高风险动作必须等用户确认。
 - 完整提示词模板与检索速查见 `resources/ooda-guidance.md`。
@@ -312,7 +314,7 @@ DECIDE 与 ACT 同义，VERIFY=Re-observe 并决定是否开启下一轮。
 ## References
 - Command reference, synonym expansion rules, forum site list, fit matrix:
   `resources/preflight-search.md`
-- OODA/TDOO 军事指导：阶段映射、核心提示词模板、检索速查：
+- OORDA 军事指导：阶段映射、核心提示词模板、检索速查：
   `resources/ooda-guidance.md`
 - 外部技能雷达（资源路由，只引用不吸收；专项能力做 build-vs-buy 时查这里）：
   `resources/skill-radar.md`
