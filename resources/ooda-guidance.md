@@ -1,12 +1,13 @@
-# OORDA/TDOO 军事指导速查
+# OORDA 军事指导速查
 
-Load this file only when running in OODA/OORDA/TDOO 军事指导模式; SKILL.md stays lean.
+Load this file only when running in OODA/OORDA 军事指导模式; SKILL.md stays lean.
 
-## 1. 什么是 TDOO
+## 1. 什么是 OORDA
 
-TDOO 在本技能中指 **OORDA 循环**（Observe-Orient-ROI-Decide-Act，OODA 的扩展）的军事化表达：
+OORDA 是在 **OODA 循环**（Observe-Orient-Decide-Act）的 Orient 与 Decide 之间
+插入 **R·ROI 投入产出门槛** 后的扩展：
 观察（Observe）→ 判断（Orient）→ 核算（ROI）→ 决策（Decide）→ 行动（Act）。
-它由约翰·博依德提出，核心思想是**唯快不破**：比对手更快完成一轮循环，
+底层的 OODA 由约翰·博依德提出，核心思想是**唯快不破**：比对手更快完成一轮循环，
 并用行动效果驱动下一轮观察，形成闭环。用户口中的"观察、分析、进攻"
 即此模型的通俗说法。
 

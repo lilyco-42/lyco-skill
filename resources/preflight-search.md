@@ -80,7 +80,7 @@ are safe defaults. A license mismatch is a legitimate hard constraint for self-b
 下一步: <one concrete action>
 ```
 
-## 6. OODA/TDOO 军事指导速查
+## 6. OORDA 军事指导速查
 
 Run the same ACQUIRE/REASON commands, but frame each phase as an OODA stage:
 

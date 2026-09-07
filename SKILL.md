@@ -260,7 +260,7 @@ Re-observe 复盘: 结果对比 / 下一轮触发条件（继续 or 关闭）
    claim has a source; deliver ≤ 12-line bullet report (requirement / candidates /
    niche knowledge / decision / next action).
 
-OODA/TDOO 模式下，步骤 2-8 即一轮循环：ACQUIRE=Observe，REASON=Orient，
+OORDA 模式下，步骤 2-8 即一轮循环：ACQUIRE=Observe，REASON=Orient，
 DECIDE 与 ACT 同义，VERIFY=Re-observe 并决定是否开启下一轮。
 
 ### Resource scope
