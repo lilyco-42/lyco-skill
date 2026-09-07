@@ -8,9 +8,10 @@ description: >
   build vs buy (自研 vs 用现成). Use when starting a new project, 项目预研, 方案调研,
   可行性分析, 找相似项目/现成方案, 要不要自己造轮子, 评估主流方案, requirement
   clarification, 前沿探索/无人之境调研, 深度研究, or build-vs-buy decisions.
-  Also use for OODA/OORDA 军事指导: run project research as a closed Observe-
-  Orient-ROI-Decide-Act loop ("观察-分析-核算-进攻"), where each lyco preflight
-  phase is an OORDA stage and verification feeds the next round.
+  Also use for 软件开发组合/SDLC 全生命周期: run project research as a closed
+  需求→调研→分析·设计→ROI→决策→开发→验证→维护 loop, where lyco owns the front-end
+  (需求到决策+验证) and routes 开发/测试/部署/维护 to specialist skills via
+  skill-radar; verification feeds the next round.
 ---
 
 # lyco — 预研先行 (Research Before Building)
@@ -36,9 +37,11 @@ description: >
    不懂一个东西的实现，就写最小化实现，慢慢模块化拼接、由简入繁。
    相信**原子化构建** —— 复杂的人体也是由基本粒子组成。
 
-项目预研本身就是一条 **OORDA（Observe-Orient-ROI-Decide-Act）闭环**：先用 gh 搜索
-“观察”现状，再评估候选“判断”态势，用 ROI 权衡“核算”投入产出（产出值÷投入本，不过门槛不动工），再选定 build-vs-buy“决策”，最后克隆/最小化验证
-“行动”，用验证结果驱动下一轮循环（军事化表达：观察、分析、核算、进攻）。
+项目预研本身就是一条 **软件开发组合（SDLC）闭环**：先钉死“需求”，用 gh 搜索做
+“调研”，评估候选做“分析·设计”，用 ROI 权衡“投入产出”（产出值÷投入本，不过门槛
+不动工），再 build-vs-buy“决策”，最后 clone/最小 scaffold“开发·落地”并“验证”，
+用验证结果驱动“维护·迭代”下一轮（lyco 重仓前端，开发/测试/部署/维护走 skill-radar
+路由给专家技能）。
 
 ### Intent signature
 - "开始一个新项目 / 帮我做个 X" where X is underspecified
@@ -48,8 +51,8 @@ description: >
 - "这个功能文档里没写，去论坛查查 / 吾爱破解 / reddit 上怎么说"
 - "这个方向是不是没人做过 / 无人之境 / 前沿探索 / 深度研究"
 - Requirement-first phrasing: "我想做 X，先别写代码，先搞清楚需求"
-- OODA / OORDA / 军事指导 phrasing: "用 OODA 走一遍" / "观察-分析-进攻" /
-  "侦察-研判-核算-决策-进攻" / "军事化决策流程"
+- 软件开发组合 / SDLC / 生命周期（旧称 OODA/OORDA 军事指导仍触发）phrasing:
+  "按 SDLC 走一遍" / "需求-开发-维护" / "软件生命周期" / "需求→设计→开发→测试→部署→维护"
 
 ### When to use
 - Starting a greenfield project, feature, or tool — before scaffolding anything
@@ -57,7 +60,7 @@ description: >
 - Gathering niche/pitfall knowledge that official docs do not cover
 - The user's request is vague enough that implementing immediately risks wasted work
 - 探索未知/前沿方向时（怀疑不可行 → 先调研 → 最小化验证）
-- 用户要 OODA/OORDA 军事指导，或希望用“观察-分析-核算-进攻”闭环驱动调研与决策
+- 用户要 软件开发组合/SDLC 全生命周期，或希望用“需求→开发→维护”闭环驱动调研与决策
 
 ### When NOT to use
 - Requirement is already crisp AND the solution is already chosen -> skip to the
@@ -144,38 +147,44 @@ description: >
 8. **FINALIZE**: Deliver the short bullet report: requirement / candidates / niche
    knowledge / decision / next action. ≤ 12 lines of substance.
 
-### OORDA 军事指导融合 (Workflow)
+### 软件开发组合 (SDLC Workflow)
 
-当用户提到 **OODA / OORDA / 军事指导 / 观察-分析-进攻 / 侦察-研判-决策** 时，
-切换到军事指导模式：把 lyco 的预研流程当作一条作战闭环来跑。
+当用户提到 **软件开发组合 / SDLC / 生命周期 / 需求-开发-维护** 时，切换到 SDLC
+模式：把 lyco 的预研流程当作一条软件开发生命周期闭环来跑。lyco 重仓前端
+（需求→调研→设计→ROI→决策→落地验证），**开发/测试/部署/维护**走 `skill-radar`
+路由给专家技能（oma-backend/oma-debug 等），lyco 只做轻量落地与反馈驱动。
 
-**阶段映射**
+**阶段映射（SDLC 组合）**
 
-| lyco 阶段 | OODA 阶段 | 军事动作 | 核心动作 |
-|-----------|-----------|----------|----------|
-| ACQUIRE（gh 搜索 + 论坛调研） | Observe 观察 | 侦察/情报收集 | 感知现状，只记录事实与信号，不预设立场 |
-| REASON（候选评估 + 根因分析） | Orient 判断 | 态势研判 | 结合上下文理解信息，识别模式、差距与假设 |
-| WEIGH（ROI 投入产出评估） | ROI 评估（R） | 战果核算 | 产出值(需求价值/补缺/可复用) ÷ 投入本(工时/风险/验证)；不过门槛→缩方案或换题 |
-| DECIDE（build-vs-buy 决策） | Decide 决策 | 选择作战方案 | 给出 ≥2 个方案，选一个并说明理由与代价 |
-| ACT（克隆 / 最小化验证） | Act 进攻/行动 | 执行打击 | 跑最小验证，带验证点与回退路径 |
-| VERIFY → 下一轮 ACQUIRE | Re-observe 反馈 | 战果评估 | 用验证结果驱动下一轮，形成闭环 |
+| SDLC 阶段 | lyco 场景 | 核心产出 |
+|----------|----------|----------|
+| 需求 Requirement | PREPARE | 一行需求 + 验收标准（理解门槛过） |
+| 调研 Research | ACQUIRE | 候选清单 + niche 知识 + 源 |
+| 分析·设计 Analysis & Design | REASON / EXPLORE / DEEP-DIVE | fit 矩阵 + ≥2 备选 + 知识图谱 |
+| ROI 评估（R 门槛） | (WEIGH) | 产出值(需求价值/补缺/可复用) ÷ 投入本(工时/风险/验证)；不过→缩方案或换题 |
+| 决策 Decision | DECIDE | adopt/fork/build + 命名硬约束 + 代价 |
+| 开发·落地 Dev(轻) | ACT | 最小 clone/scaffold（深度开发→skill-radar） |
+| 验证 Verify | VERIFY/FINALIZE | 每条结论有源 + ≤12 行报告 |
+| 维护·迭代 Maintain | → 下一轮 PREPARE | 反馈驱动下一轮（深度运维→skill-radar） |
 
-**循环核心（军事版）**：唯快不破 —— 比对手更快完成一轮循环；可逆动作
-先求 70% 置信度就行动，不追求 100%；行动后必须重新观察，不能停在“好像完成了”。
+**循环核心**：前端重、后端轻 —— 预研重仓在需求到决策；可逆动作先求 70% 置信度
+就行动，不追求 100%；行动后必须重新观察，不能停在“好像完成了”。
 
-**每轮输出（军事版核心提示词）**
+**每轮输出（SDLC 核心提示词）**
 
 ```text
-Observe 侦察: 当前状态（只列事实）/ 信号与未知 / 已用的 gh 与 forum 检索
-Orient 研判: 根因或差距 / 相似先例 / ≥2 个备选解释
-ROI 权衡: 产出值(核心需求满足度/补缺/可复用) ÷ 投入本(工时/风险/验证) / 过不过门槛 / 不过→缩方案或换题
-Decide 决策: 方案 A/B + 理由 / 选哪个 + 置信度与代价 / 验收标准
-Act 进攻: 最小动作 / 立即验证点 / 回退路径
-Re-observe 复盘: 结果对比 / 下一轮触发条件（继续 or 关闭）
+需求: 一行需求 + 验收标准 / 模糊词已澄清（理解门槛过）
+调研: gh+论坛检索 / 候选清单 + niche 知识 + 源
+分析·设计: fit 矩阵 / ≥2 备选 / 差距与先例
+ROI 权衡: 产出值(需求价值/补缺/可复用) ÷ 投入本(工时/风险/验证) / 过不过门槛 / 不过→缩方案或换题
+决策: adopt/fork/build + 理由 + 命名硬约束 + 代价
+开发·落地: 最小 clone/scaffold / 深度开发→skill-radar
+验证: 每条结论有源 / 需求仍被满足 / ≤12 行报告
+维护·迭代: 下一轮触发条件（继续 or 关闭）
 ```
 
 **循环规则**：
-- 一轮 = ACQUIRE(Observe) → REASON(Orient) → WEIGH(ROI) → DECIDE → ACT → VERIFY。
+- 一轮 = 需求 → 调研 → 分析·设计 → ROI 评估 → 决策 → 开发·落地 → 验证 → 维护·迭代。
 - **理解门槛（先于一轮）**：若用户的话/提示词没看懂、有歧义或含陌生概念 → 强制两件事缺一不可：① WebFetch/WebSearch 至少搜一次同步信息（目的是弄清用户真实核心需求）；② 直接向用户提问“核心需求是什么”。没搜+没问就动手 = 违规。
 - 验证未达验收标准 → 自动进入下一轮，从新的事实重新观察，不修旧结论。
 - 可逆动作以 70% 置信度执行；不可逆或高风险动作必须等用户确认。
@@ -262,8 +271,9 @@ Re-observe 复盘: 结果对比 / 下一轮触发条件（继续 or 关闭）
    claim has a source; deliver ≤ 12-line bullet report (requirement / candidates /
    niche knowledge / decision / next action).
 
-OORDA 模式下，步骤 2-8 即一轮循环：ACQUIRE=Observe，REASON=Orient，WEIGH=ROI 评估（不过门槛不动工），
-DECIDE 与 ACT 同义，VERIFY=Re-observe 并决定是否开启下一轮。
+SDLC 模式下，步骤 2-8 即一轮循环：需求=Requirement，调研+分析=Research/Design，
+ROI 评估=门槛（不过不动工），决策=Decision，开发·落地+验证=Dev+Verify，维护·迭代
+驱动下一轮。
 
 ### Resource scope
 | Scope | Resource target |
@@ -314,7 +324,7 @@ DECIDE 与 ACT 同义，VERIFY=Re-observe 并决定是否开启下一轮。
 ## References
 - Command reference, synonym expansion rules, forum site list, fit matrix:
   `resources/preflight-search.md`
-- OORDA 军事指导：阶段映射、核心提示词模板、检索速查：
+- 软件开发组合 SDLC：阶段映射、核心提示词模板、检索速查：
   `resources/ooda-guidance.md`
 - 外部技能雷达（资源路由，只引用不吸收；专项能力做 build-vs-buy 时查这里）：
   `resources/skill-radar.md`
