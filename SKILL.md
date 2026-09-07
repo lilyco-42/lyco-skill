@@ -8,9 +8,9 @@ description: >
   build vs buy (自研 vs 用现成). Use when starting a new project, 项目预研, 方案调研,
   可行性分析, 找相似项目/现成方案, 要不要自己造轮子, 评估主流方案, requirement
   clarification, 前沿探索/无人之境调研, 深度研究, or build-vs-buy decisions.
-  Also use for OODA/TDOO 军事指导: run project research as a closed Observe-Orient-
-  Decide-Act loop ("观察-分析-进攻"), where each lyco preflight phase is an OODA
-  stage and verification feeds the next round.
+  Also use for OODA/OORDA/TDOO 军事指导: run project research as a closed Observe-
+  Orient-ROI-Decide-Act loop ("观察-分析-核算-进攻"), where each lyco preflight
+  phase is an OORDA stage and verification feeds the next round.
 ---
 
 # lyco — 预研先行 (Research Before Building)
@@ -48,8 +48,8 @@ description: >
 - "这个功能文档里没写，去论坛查查 / 吾爱破解 / reddit 上怎么说"
 - "这个方向是不是没人做过 / 无人之境 / 前沿探索 / 深度研究"
 - Requirement-first phrasing: "我想做 X，先别写代码，先搞清楚需求"
-- OODA / TDOO / 军事指导 phrasing: "用 OODA 走一遍" / "观察-分析-进攻" /
-  "侦察-研判-决策-进攻" / "军事化决策流程"
+- OODA / OORDA / TDOO / 军事指导 phrasing: "用 OODA 走一遍" / "观察-分析-进攻" /
+  "侦察-研判-核算-决策-进攻" / "军事化决策流程"
 
 ### When to use
 - Starting a greenfield project, feature, or tool — before scaffolding anything
@@ -167,6 +167,7 @@ description: >
 ```text
 Observe 侦察: 当前状态（只列事实）/ 信号与未知 / 已用的 gh 与 forum 检索
 Orient 研判: 根因或差距 / 相似先例 / ≥2 个备选解释
+ROI 权衡: 产出值(核心需求满足度/补缺/可复用) ÷ 投入本(工时/风险/验证) / 过不过门槛 / 不过→缩方案或换题
 Decide 决策: 方案 A/B + 理由 / 选哪个 + 置信度与代价 / 验收标准
 Act 进攻: 最小动作 / 立即验证点 / 回退路径
 Re-observe 复盘: 结果对比 / 下一轮触发条件（继续 or 关闭）

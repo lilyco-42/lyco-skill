@@ -1,11 +1,11 @@
-# OODA/TDOO 军事指导速查
+# OORDA/TDOO 军事指导速查
 
-Load this file only when running in OODA/TDOO 军事指导模式; SKILL.md stays lean.
+Load this file only when running in OODA/OORDA/TDOO 军事指导模式; SKILL.md stays lean.
 
 ## 1. 什么是 TDOO
 
-TDOO 在本技能中指 **OODA 循环**（Observe-Orient-Decide-Act）的军事化表达：
-观察（Observe）→ 判断（Orient）→ 决策（Decide）→ 行动（Act）。
+TDOO 在本技能中指 **OORDA 循环**（Observe-Orient-ROI-Decide-Act，OODA 的扩展）的军事化表达：
+观察（Observe）→ 判断（Orient）→ 核算（ROI）→ 决策（Decide）→ 行动（Act）。
 它由约翰·博依德提出，核心思想是**唯快不破**：比对手更快完成一轮循环，
 并用行动效果驱动下一轮观察，形成闭环。用户口中的"观察、分析、进攻"
 即此模型的通俗说法。
@@ -16,6 +16,7 @@ TDOO 在本技能中指 **OODA 循环**（Observe-Orient-Decide-Act）的军事�
 |-----------|-----------|----------|----------|
 | ACQUIRE（gh 搜索 + 论坛调研） | Observe 观察 | 侦察/情报收集 | 事实、信号、未知项 |
 | REASON（候选评估 + 根因分析） | Orient 判断 | 态势研判 | 模式、差距、≥2 假设 |
+| WEIGH（ROI 投入产出评估） | ROI 评估（R） | 战果核算 | 产出值÷投入本 + 过/不过门槛 |
 | DECIDE（build-vs-buy 决策） | Decide 决策 | 选择作战方案 | 方案 + 理由 + 代价 |
 | ACT（克隆 / 最小化验证） | Act 行动 | 执行打击 | 最小验证 + 回退路径 |
 | VERIFY → 下一轮 ACQUIRE | Re-observe 反馈 | 战果评估 | 结果对比 + 是否下一轮 |
