@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200" font-family="system-ui,-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1a0f1a"/><stop offset="1" stop-color="#3b0764"/>
+    </linearGradient>
+    <linearGradient id="ac" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#d946ef"/><stop offset="1" stop-color="#e879f9"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="200" fill="url(#bg)"/>
+  <circle cx="540" cy="30" r="80" fill="#d946ef" opacity="0.08"/>
+  <text x="552" y="164" font-size="44" font-weight="700" fill="#d946ef" opacity="0.30" text-anchor="end" font-family="Consolas,monospace">OODA</text>
+  <rect x="0" y="0" width="6" height="200" fill="url(#ac)"/>
+  <rect x="36" y="46" height="34" rx="17" width="200" fill="#d946ef" opacity="0.14" stroke="#d946ef"/>
+  <text x="136" y="69" font-size="15" fill="#e879f9" text-anchor="middle">Agent Skill · ★5</text>
+  <text x="36" y="126" font-size="36" font-weight="700" fill="#f8fafc">lyco-skill</text>
+  <text x="36" y="158" font-size="17" fill="#e879f9">Agent 预研技能 · 需求钉死 → 搜现成方案 → build-vs-buy · OODA 闭环</text>
+</svg>

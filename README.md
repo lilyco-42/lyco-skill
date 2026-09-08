@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="docs/banner.svg" width="720" alt="banner">
+</div>
+
 # lyco — 预研先行 + OODA 军事指导融合
 
 项目预研先行（Research Before Building）—— 写任何代码之前，先钉需求、搜现成方案、挖论坛冷门知识、做 build-vs-buy 决策，最后用 ≤12 行简短汇报收尾。
