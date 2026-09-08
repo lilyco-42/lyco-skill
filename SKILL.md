@@ -1,5 +1,6 @@
 ---
 name: lyco
+agent_created: true
 description: >
   Project feasibility preflight before writing any code: clarify the real requirement
   first, then use gh CLI fuzzy/synonym repo search to find existing solutions, collect
