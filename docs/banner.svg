@@ -12,7 +12,7 @@
   <text x="552" y="164" font-size="44" font-weight="700" fill="#d946ef" opacity="0.30" text-anchor="end" font-family="Consolas,monospace">OODA</text>
   <rect x="0" y="0" width="6" height="200" fill="url(#ac)"/>
   <rect x="36" y="46" height="34" rx="17" width="200" fill="#d946ef" opacity="0.14" stroke="#d946ef"/>
-  <text x="136" y="69" font-size="15" fill="#e879f9" text-anchor="middle">Agent Skill · ★5</text>
+  <text x="136" y="69" font-size="15" fill="#e879f9" text-anchor="middle">Agent Skill · ★9</text>
   <text x="36" y="126" font-size="36" font-weight="700" fill="#f8fafc">lyco-skill</text>
   <text x="36" y="158" font-size="17" fill="#e879f9">Agent 预研技能 · 需求钉死 → 搜现成方案 → build-vs-buy · OODA 闭环</text>
 </svg>
