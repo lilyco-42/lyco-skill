@@ -57,7 +57,7 @@ curl -fsSL https://raw.githubusercontent.com/lilyco-42/lyco-skill/main/install.s
 git clone https://github.com/lilyco-42/lyco-skill.git ~/.agents/skills/lyco
 ```
 
-上面的管道命令可直接在 fish 中运行；`<(...)` 是 Bash / Zsh 的进程替换语法，不能直接用于 fish。`--all-agents` 模式需要 Node.js 和 npm，且可能全局安装 `skills` CLI。
+上面的管道命令可直接在 fish 中运行；`<(...)` 是 Bash / Zsh 的进程替换语法，不能直接用于 fish。`--all-agents` 模式会使用已安装的 `skills` CLI；如果没有，则通过 Node.js 和 npx 运行，无需全局安装 npm 包（目前 skills CLI 要求 Node.js 22.20 或更高版本）。
 
 **全支持原理**（Agent Skills 生态，[spec-weave 分析](https://spec-weave.com/docs/guides/agent-skills-extensibility-analysis/)）：
 
