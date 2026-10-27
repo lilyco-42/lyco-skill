@@ -42,20 +42,22 @@ iex (irm https://raw.githubusercontent.com/lilyco-42/lyco-skill/main/install.ps1
 iex (irm https://raw.githubusercontent.com/lilyco-42/lyco-skill/main/install.ps1) ; powershell -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/lilyco-42/lyco-skill/main/install.ps1 -OutFile $env:TEMP\lyco-install.ps1; & $env:TEMP\lyco-install.ps1 -AllAgents"
 ```
 
-> 注意：`bash <(...)` 进程替换语法在 Windows 原生终端不可用，Windows 请用上面的 PowerShell 命令。
+> Windows 原生 PowerShell 请使用上面的命令；Git Bash 和 WSL 可以使用下面的命令。
 
-### Linux / macOS（bash）
+### Linux / macOS（Bash、Zsh、fish）
 
 ```bash
 # 一键安装
-bash <(curl -fsSL https://raw.githubusercontent.com/lilyco-42/lyco-skill/main/install.sh)
+curl -fsSL https://raw.githubusercontent.com/lilyco-42/lyco-skill/main/install.sh | bash
 
 # 全支持模式：装到所有 agent（内部用 vercel-labs/skills CLI）
-bash <(curl -fsSL https://raw.githubusercontent.com/lilyco-42/lyco-skill/main/install.sh) --all-agents
+curl -fsSL https://raw.githubusercontent.com/lilyco-42/lyco-skill/main/install.sh | bash -s -- --all-agents
 
 # 手动：克隆到全局技能目录（universal agents 原生读取）
 git clone https://github.com/lilyco-42/lyco-skill.git ~/.agents/skills/lyco
 ```
+
+上面的管道命令可直接在 fish 中运行；`<(...)` 是 Bash / Zsh 的进程替换语法，不能直接用于 fish。`--all-agents` 模式需要 Node.js 和 npm，且可能全局安装 `skills` CLI。
 
 **全支持原理**（Agent Skills 生态，[spec-weave 分析](https://spec-weave.com/docs/guides/agent-skills-extensibility-analysis/)）：
 
