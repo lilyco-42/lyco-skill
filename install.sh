@@ -61,15 +61,15 @@ AGENT="${1:-all}"
 if [[ "$AGENT" == "--all-agents" ]]; then
     if command -v skills >/dev/null 2>&1; then
         skills add lilyco-42/lyco-skill --global --agent '*' --yes
-        info "已装到所有支持的 agent。"
-        info "更新: skills update lyco -g ; 卸载: skills remove lyco --global --agent '*' --yes"
-        exit 0
+    elif command -v npx >/dev/null 2>&1; then
+        info "未检测到 skills CLI，通过 npx 运行（无需全局安装）。"
+        npx --yes skills add lilyco-42/lyco-skill --global --agent '*' --yes
     else
-        info "未检测到 skills CLI，先安装: npm install -g skills"
-        npm install -g skills
-        skills add lilyco-42/lyco-skill --global --agent '*' --yes
-        exit 0
+        die "全支持模式需要 skills CLI 或 Node.js 和 npx，请先安装 Node.js/npm"
     fi
+    info "已装到所有支持的 agent。"
+    info "更新: npx --yes skills update lyco -g ; 卸载: npx --yes skills remove lyco --global --agent '*' --yes"
+    exit 0
 fi
 
 SRC="$(fetch_src)"
