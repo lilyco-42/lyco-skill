@@ -78,6 +78,16 @@ lyco/
     └── skill-radar.md              # 外部热门技能雷达（资源路由：只引用不吸收，专项能力按需 npx skills add）
 ```
 
+## 参赛与社区发布
+
+本作品参加 **2026 华为开发者大赛 · 小红书 Skill 创新赛**（通用赛道 / 开发工具）。
+
+- 作品说明（场景、五维评审对齐、复用方式）：`docs/competition/SUBMISSION.md`
+- 小红书笔记文案：`docs/competition/xiaohongshu-note.md`
+- 发布与提交清单：`docs/competition/CHECKLIST.md`
+
+安装后在任意 Agent 中说「先别写代码，帮我预研一下 XXX」即可触发。
+
 ## 设计原则
 
 - **CLI-first**：每一步都是可复现的命令（gh / curl / web_search）
