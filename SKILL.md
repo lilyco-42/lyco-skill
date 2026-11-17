@@ -1,18 +1,7 @@
 ---
 name: lyco
 agent_created: true
-description: >
-  Project feasibility preflight before writing any code: clarify the real requirement
-  first, then use gh CLI fuzzy/synonym repo search to find existing solutions, collect
-  niche knowledge from forums (Reddit, Stack Overflow, 吾爱破解/52pojie, HN) instead of
-  guessing, evaluate mainstream options against the requirement, and only then decide
-  build vs buy (自研 vs 用现成). Use when starting a new project, 项目预研, 方案调研,
-  可行性分析, 找相似项目/现成方案, 要不要自己造轮子, 评估主流方案, requirement
-  clarification, 前沿探索/无人之境调研, 深度研究, or build-vs-buy decisions.
-  Also use for 软件开发组合/SDLC 全生命周期: run project research as a closed
-  需求→调研→分析·设计→ROI→决策→开发→验证→维护 loop, where lyco owns the front-end
-  (需求到决策+验证) and routes 开发/测试/部署/维护 to specialist skills via
-  skill-radar; verification feeds the next round.
+description: "Project feasibility preflight before writing any code: clarify the real requirement first, then use gh CLI fuzzy/synonym repo search to find existing solutions, collect niche knowledge from forums (Reddit, Stack Overflow, 吾爱破解/52pojie, HN) instead of guessing, evaluate mainstream options against the requirement, and only then decide build vs buy (自研 vs 用现成). Use when starting a new project, 项目预研, 方案调研, 可行性分析, 找相似项目/现成方案, 要不要自己造轮子, 评估主流方案, requirement clarification, 前沿探索/无人之境调研, 深度研究, or build-vs-buy decisions. Also use for 软件开发组合/SDLC 全生命周期: run project research as a closed 需求→调研→分析·设计→ROI→决策→开发→验证→维护 loop, where lyco owns the front-end (需求到决策+验证) and routes 开发/测试/部署/维护 to specialist skills via skill-radar; verification feeds the next round."
 ---
 
 # lyco — 预研先行 (Research Before Building)
