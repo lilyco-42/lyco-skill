@@ -58,6 +58,15 @@
 |------|-----|---------|------|--------------|
 | blader/humanizer | ~38.8k | MIT | 去除文本的 AI 味 | FINALIZE 报告 / 文档交付前润色 |
 
+## 7. Web2CLI & Browser/Agent Tooling（网页转 CLI / 浏览器自动化）
+
+| 仓库 / 工具 | ⭐ | License | 用途 | lyco 路由备注 |
+|------------|-----|---------|------|--------------|
+| jackwener/OpenCLI | ~31.2k | MIT | 网页转 CLI + 已登录 Chrome 桥接与站点适配器中心 | 需要复用登录态 Chrome 扩展或现成站点适配器时参考 |
+| only-cli/oc | ~690 | MIT | 零配置网页转低 token 编号 CLI 视图 | 通用网页阅读/跳转低 token 蒸馏参考 |
+| lonexreb/site2cli | ~66 | MIT | 抓包/Trace 自动发现 API 并生成 OpenAPI + CLI/MCP | HAR/CDP API 发现与 Schema 推导参考 |
+| lilyco (`lweb2cli`) | 本机框架 | MIT/Apache-2.0 | Rust 原生网页/OpenAPI/HAR → CLI/TUI/Web/MCP 四端框架 | 任何网页转四端应用/独立二进制优先用 `lilyco-web2cli` |
+
 ## 使用规则
 
 - **先检索后调用（信条 1/3）**：先在 Collections 类仓库确认有对应能力，
