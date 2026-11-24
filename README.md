@@ -2,10 +2,10 @@
   <img src="docs/banner.svg" width="720" alt="banner">
 </div>
 
-# lyco — 预研先行 + OODA 军事指导融合
+# lyco — 预研先行 · 软件开发组合（SDLC）闭环
 
 项目预研先行（Research Before Building）—— 写任何代码之前，先钉需求、搜现成方案、挖论坛冷门知识、做 build-vs-buy 决策，最后用 ≤12 行简短汇报收尾。
-融合 OODA（Observe-Orient-Decide-Act）军事决策循环，以"观察-分析-进攻"闭环驱动调研与决策。
+把项目预研跑成一条 SDLC 闭环：需求 → 调研 → 分析·设计 → ROI → 决策 → 开发·落地 → 验证 → 维护·迭代（旧称 OODA/OORDA 军事指导，仍可作为触发词）。
 
 符合 [Agent Skills](https://agentskills.io) 开放标准（`SKILL.md` + frontmatter），按 SSL-lite 结构编写。
 
@@ -15,7 +15,7 @@
 - "有没有现成的方案 / github 上有没有人做过 / 要不要自己造轮子"
 - 方案调研 / 可行性分析 / 预研
 - 官方文档没写的坑，需要去 Reddit / Stack Overflow / 吾爱破解 找
-- OODA / OORDA 军事指导，用"观察-分析-进攻"闭环跑项目预研
+- 软件开发组合 / SDLC 全生命周期，用"需求→开发→维护"闭环驱动调研与决策（旧触发词 OODA / OORDA 仍有效）
 
 **不要用于**：需求已明确且方案已定的直接开发（走对应 specialist 技能）、纯市场竞品调研（oma-market）、已知库的 API 查询（oma-search）。
 
@@ -27,7 +27,7 @@
 3. REASON   候选 vs 需求打分；主流方案 ≥80% 覆盖默认采用，自研必须写明被哪条硬约束逼的
 4. ACT      克隆候选验证 or 最小脚手架（本技能到此为止）
 5. FINALIZE ≤12 行 bullet 汇报：需求 / 候选 / 冷门知识 / 决策 / 下一步
-OODA 模式：ACQUIRE=Observe 侦察 → REASON=Orient 研判 → DECIDE 决策 → ACT 进攻 → VERIFY=Re-observe 复盘
+SDLC 模式：需求=PREPARE → 调研=ACQUIRE → 分析·设计=REASON/EXPLORE/DEEP-DIVE → ROI 门槛 → 决策 → 开发·落地=ACT → 验证=VERIFY → 维护·迭代=下一轮
 ```
 
 ## 安装

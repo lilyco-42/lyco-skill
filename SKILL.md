@@ -178,7 +178,7 @@ ROI 权衡: 产出值(需求价值/补缺/可复用) ÷ 投入本(工时/风险/
 - **理解门槛（先于一轮）**：若用户的话/提示词没看懂、有歧义或含陌生概念 → 强制两件事缺一不可：① WebFetch/WebSearch 至少搜一次同步信息（目的是弄清用户真实核心需求）；② 直接向用户提问“核心需求是什么”。没搜+没问就动手 = 违规。
 - 验证未达验收标准 → 自动进入下一轮，从新的事实重新观察，不修旧结论。
 - 可逆动作以 70% 置信度执行；不可逆或高风险动作必须等用户确认。
-- 完整提示词模板与检索速查见 `resources/ooda-guidance.md`。
+- 完整提示词模板与检索速查见 `resources/sdlc-guidance.md`。
 
 ### Transitions
 - If the user starts dictating implementation details before the requirement is agreed,
@@ -315,7 +315,7 @@ ROI 评估=门槛（不过不动工），决策=Decision，开发·落地+验证
 - Command reference, synonym expansion rules, forum site list, fit matrix:
   `resources/preflight-search.md`
 - 软件开发组合 SDLC：阶段映射、核心提示词模板、检索速查：
-  `resources/ooda-guidance.md`
+  `resources/sdlc-guidance.md`
 - 外部技能雷达（资源路由，只引用不吸收；专项能力做 build-vs-buy 时查这里）：
   `resources/skill-radar.md`
 - 五条核心信条（用户方法论）：同类经验汲取 / 理解用户 / 评估可行性 /

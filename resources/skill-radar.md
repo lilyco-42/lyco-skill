@@ -4,7 +4,7 @@
 只建立**资源路由**：需要某类专项能力时，从这里挑一个专门 skill 引用
 （`npx skills add owner/repo/skill` 或按分类检索），执行完回到本预研流程。
 
-- 更新规则（OODA Re-observe）：发现新热门技能按分类追加一行；stars 失真时
+- 更新规则（SDLC 维护·迭代）：发现新热门技能按分类追加一行；stars 失真时
   用 `gh repo view owner/repo` 或 `gh api repos/owner/repo` 校准，不编造数字。
 - 数据基准：2026-08，`gh api repos/owner/repo` 实测。
 

@@ -80,7 +80,7 @@ are safe defaults. A license mismatch is a legitimate hard constraint for self-b
 下一步: <one concrete action>
 ```
 
-## 6. OORDA 军事指导速查
+## 6. OODA/OORDA 速查（旧称，已并入 SDLC）
 
 Run the same ACQUIRE/REASON commands, but frame each phase as an OODA stage:
 
@@ -92,4 +92,4 @@ Run the same ACQUIRE/REASON commands, but frame each phase as an OODA stage:
 | Act | ACT | `gh repo clone owner/repo` or minimal scaffold — verify with a feedback point |
 | Re-observe | VERIFY | compare result vs prediction; decide next round |
 
-Full prompt template and military workflow: `resources/ooda-guidance.md`.
+Full SDLC prompt template: `resources/sdlc-guidance.md`.
