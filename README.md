@@ -39,7 +39,7 @@ SDLC 模式：需求=PREPARE → 调研=ACQUIRE → 分析·设计=REASON/EXPLOR
 iex (irm https://raw.githubusercontent.com/lilyco-42/lyco-skill/main/install.ps1)
 
 # 装到所有 agent（60+，需 node/npm）
-iex (irm https://raw.githubusercontent.com/lilyco-42/lyco-skill/main/install.ps1) ; powershell -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/lilyco-42/lyco-skill/main/install.ps1 -OutFile $env:TEMP\lyco-install.ps1; & $env:TEMP\lyco-install.ps1 -AllAgents"
+& ([scriptblock]::Create((irm https://raw.githubusercontent.com/lilyco-42/lyco-skill/main/install.ps1))) -AllAgents
 ```
 
 > Windows 原生 PowerShell 请使用上面的命令；Git Bash 和 WSL 可以使用下面的命令。
@@ -71,10 +71,11 @@ git clone https://github.com/lilyco-42/lyco-skill.git ~/.agents/skills/lyco
 
 ```
 lyco/
-├── SKILL.md                        # 技能主体：Scheduling / Structural Flow / Logical Operations / References
+├── SKILL.md                        # 技能主体：信条 / Workflow 表 / 决策规则 / Guardrails（≤150 行）
 └── resources/
     ├── preflight-search.md         # gh 命令速查、同义词扩展规则、论坛站点清单、build-vs-buy 矩阵
-    ├── ooda-guidance.md            # OODA 军事指导提示词模板、阶段映射、检索速查
+    ├── sdlc-guidance.md            # SDLC 阶段映射、每轮提示词模板、检索速查（含 OODA 旧称对照）
+    ├── workflow-reference.md       # 输入/输出字段、控制流、SSL 动作映射、资源范围与副作用
     └── skill-radar.md              # 外部热门技能雷达（资源路由：只引用不吸收，专项能力按需 npx skills add）
 ```
 
