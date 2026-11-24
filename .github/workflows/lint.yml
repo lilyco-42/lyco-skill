@@ -1,0 +1,37 @@
+name: lint
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  skill:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: shellcheck install.sh
+        run: shellcheck install.sh
+      - name: SKILL.md frontmatter + resource links
+        env:
+          SKILL_NAME: ${{ github.event.repository.name == 'lyco-skill' && 'lyco' || github.event.repository.name }}
+        run: |
+          python3 - <<'PY'
+          import os, re, sys, pathlib
+          t = pathlib.Path("SKILL.md").read_text(encoding="utf-8")
+          m = re.match(r"^---\n(.*?)\n---\n", t, re.S)
+          if not m: sys.exit("SKILL.md: missing frontmatter")
+          fm = m.group(1)
+          name = os.environ["SKILL_NAME"]
+          if not re.search(rf"^name: {re.escape(name)}$", fm, re.M):
+              sys.exit(f"frontmatter: expected 'name: {name}'")
+          d = re.search(r"^description: (.+)$", fm, re.M)
+          if not d or d.group(1).strip() in (">", "|", ">-", "|-"):
+              sys.exit("frontmatter: description must be a single line")
+          missing = [r for r in set(re.findall(r"resources/[\w.-]+\.md", t)) if not pathlib.Path(r).is_file()]
+          if missing: sys.exit(f"missing referenced files: {missing}")
+          print(f"ok: {name}, {len(t.splitlines())} lines")
+          PY
