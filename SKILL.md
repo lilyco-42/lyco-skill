@@ -1,322 +1,123 @@
 ---
 name: lyco
-agent_created: true
-description: "Project feasibility preflight before writing any code: clarify the real requirement first, then use gh CLI fuzzy/synonym repo search to find existing solutions, collect niche knowledge from forums (Reddit, Stack Overflow, 吾爱破解/52pojie, HN) instead of guessing, evaluate mainstream options against the requirement, and only then decide build vs buy (自研 vs 用现成). Use when starting a new project, 项目预研, 方案调研, 可行性分析, 找相似项目/现成方案, 要不要自己造轮子, 评估主流方案, requirement clarification, 前沿探索/无人之境调研, 深度研究, or build-vs-buy decisions. Also use for 软件开发组合/SDLC 全生命周期: run project research as a closed 需求→调研→分析·设计→ROI→决策→开发→验证→维护 loop, where lyco owns the front-end (需求到决策+验证) and routes 开发/测试/部署/维护 to specialist skills via skill-radar; verification feeds the next round."
+description: "Project feasibility preflight before writing code: clarify the real requirement, gh search for existing solutions (找现成方案), mine forums (Reddit/SO/52pojie/HN), then decide build vs buy (要不要造轮子). Use for 项目预研, 方案调研, 可行性分析, 前沿探索/深度研究, and 软件开发组合/SDLC 需求→调研→ROI→决策→验证 loops (aliases: OODA/OORDA)."
 ---
 
 # lyco — 预研先行 (Research Before Building)
 
-## Scheduling
-
-### Goal
+## Goal
 确保每个项目开工前都基于**已验证的需求**和**调研过的决策**，而不是猜测。
-五条核心信条（用户方法论，本技能的灵魂）：
+预研本身是一条 **SDLC 闭环**：需求 → 调研 → 分析·设计 → ROI → 决策 → 开发·落地 → 验证 →
+维护·迭代。lyco 重仓前端（需求到决策 + 验证），深度开发/测试/部署/维护经
+`resources/skill-radar.md` 路由给专家技能。
 
-1. **同类经验汲取 — 没有调查没有发言权**：项目开工前默认你的知识库是落后的。
-   用 gh CLI 模糊/大量搜索 + 搜索引擎（google / duckduckgo）+ 论坛
-   （stackoverflow / reddit / 吾爱破解 / HN）获取充足调研，再开口。
-2. **理解你的用户**：用户的知识面通常是不足的，甚至不懂专业术语。要充分理解
-   用户的**核心目的**与**具体实现**；遇到"这里/这样"等模糊指代，若你没有识图
-   能力就承认，并提示"将先执行同类经验汲取"；给出**完整、准确、简单扼要**的提问。
-3. **评估可行性 — 避免走进死胡同**：当资料证明他人实现过类似效果，说明可行时，
-   不要自己埋头研究 —— 去**克隆他人的想法并研究具体实现**。
-4. **探索实现 — 无人之境**：当确定方向是无人之境，**首先怀疑这条路已在论文或
-   硬件中被证明不可行**，回到第 1 条同类经验汲取；找到些许材料后，把所有模糊或
-   相似文件整理成 md / Obsidian 知识图谱，再开始深度研究。
-5. **深度研究 — 低投入高收益**：代码、文字、图片输出都要满足**最小化验证可行性**；
-   不懂一个东西的实现，就写最小化实现，慢慢模块化拼接、由简入繁。
-   相信**原子化构建** —— 复杂的人体也是由基本粒子组成。
+## 五条核心信条（本技能的灵魂）
+1. **同类经验汲取 — 没有调查没有发言权**：默认你的知识库是落后的。用 gh CLI 模糊/大量
+   搜索 + 搜索引擎（google / duckduckgo）+ 论坛（SO / reddit / 吾爱破解 / HN）充足调研后再开口。
+2. **理解你的用户**：用户常不懂术语。充分理解**核心目的**与**具体实现**；遇到"这里/这样"等
+   模糊指代，若无识图能力就承认，提示"将先执行同类经验汲取"；提问**完整、准确、简单扼要**。
+3. **评估可行性 — 避免走进死胡同**：资料证明他人实现过 = 可行，不要埋头研究 ——
+   **克隆他人的想法并研究具体实现**。
+4. **探索实现 — 无人之境**：先**怀疑这条路已在论文或硬件中被证明不可行**，回到信条 1；
+   找到些许材料后整理成 md / Obsidian 知识图谱，再深度研究。
+5. **深度研究 — 低投入高收益**：任何代码/文字/图片输出先满足**最小化验证可行性**；不懂就写
+   最小化实现，模块化拼接、由简入繁；相信**原子化构建**。
 
-项目预研本身就是一条 **软件开发组合（SDLC）闭环**：先钉死“需求”，用 gh 搜索做
-“调研”，评估候选做“分析·设计”，用 ROI 权衡“投入产出”（产出值÷投入本，不过门槛
-不动工），再 build-vs-buy“决策”，最后 clone/最小 scaffold“开发·落地”并“验证”，
-用验证结果驱动“维护·迭代”下一轮（lyco 重仓前端，开发/测试/部署/维护走 skill-radar
-路由给专家技能）。
-
-### Intent signature
-- "开始一个新项目 / 帮我做个 X" where X is underspecified
-- "有没有现成的方案 / 找找类似的项目 / github 上有没有人做过"
-- "要不要自己造轮子 / 自研还是用现成的 / build vs buy"
-- "调研一下怎么做 / 可行性 / 预研 / 方案评估"
-- "这个功能文档里没写，去论坛查查 / 吾爱破解 / reddit 上怎么说"
+## When to use
+- 新项目/功能/工具开工前："帮我做个 X"（X 不明确）/ "先别写代码，先搞清楚需求"
+- "有没有现成的方案 / github 上有没有人做过 / 自研还是用现成 / build vs buy"
+- "调研 / 可行性 / 预研 / 方案评估"；文档没写的坑去论坛查（吾爱破解 / reddit）
 - "这个方向是不是没人做过 / 无人之境 / 前沿探索 / 深度研究"
-- Requirement-first phrasing: "我想做 X，先别写代码，先搞清楚需求"
-- 软件开发组合 / SDLC / 生命周期（旧称 OODA/OORDA 军事指导仍触发）phrasing:
-  "按 SDLC 走一遍" / "需求-开发-维护" / "软件生命周期" / "需求→设计→开发→测试→部署→维护"
+- 软件开发组合 / SDLC / 生命周期 / "需求→设计→开发→测试→部署→维护"（旧称 OODA/OORDA 仍触发）
 
-### When to use
-- Starting a greenfield project, feature, or tool — before scaffolding anything
-- Deciding whether to adopt, fork, or build a solution from scratch
-- Gathering niche/pitfall knowledge that official docs do not cover
-- The user's request is vague enough that implementing immediately risks wasted work
-- 探索未知/前沿方向时（怀疑不可行 → 先调研 → 最小化验证）
-- 用户要 软件开发组合/SDLC 全生命周期，或希望用“需求→开发→维护”闭环驱动调研与决策
+**When NOT to use**（括号内为可选外部技能，若未安装则自行用通用能力完成）：
+- 需求已明确且方案已定 → 直接开发（oma-backend / oma-frontend / oma-mobile / oma-debug）
+- 纯市场/竞品调研（oma-market）；已知库 API 查询（oma-search）；学术综述（oma-scholar）；
+  无具体构建目标的开放头脑风暴（oma-brainstorm）
 
-### When NOT to use
-- Requirement is already crisp AND the solution is already chosen -> skip to the
-  matching specialist skill (oma-backend / oma-frontend / oma-mobile / oma-debug)
-- Pure market/competitor research (pain points, trends, SWOT) -> use oma-market
-- Generic lookup of a known library's API or docs -> use oma-search
-- Academic literature review -> use oma-scholar
-- Brainstorming open-ended ideas without a concrete build target -> use oma-brainstorm
+## Dependencies
+- 必需：`gh` CLI 已认证（`gh auth status`），失败时 `curl` GitHub API 兜底；web search 工具
+- 可选：`jq`；Obsidian vault（无人之境知识图谱）
+- 可选：DSH goal 工具（create_goal/get_goal/update_goal）挂长任务 —— 若未安装则在
+  scratch md 中记录进度，跳过此步
+- 可选：oma-* 等外部专家技能 / `npx skills add owner/repo`（见 skill-radar，只路由不吸收代码）
+  —— 若未安装则自行执行对应步骤或跳过，不阻塞预研
 
-### Expected inputs
-- `goal`: one sentence of what the user wants to achieve (or a rough draft of it)
-- `constraints` (optional): budget, stack preference, license, performance, offline,
-  security, existing codebase constraints
-- `domain` (optional): keywords/industry terms to seed the search
-- 用户原话里的模糊词（"这里/这样/那个"）：**不要猜**，先承认能力边界再提问
+## Workflow（SDLC 阶段 ↔ lyco 场景）
 
-### Expected outputs
-- `requirement`: one-line restated requirement agreed with the user (goal + top
-  constraints + acceptance)
-- `candidates`: existing projects found via gh CLI, each with stars / license /
-  last-update / fit-vs-requirement, and source URL
-- `niche_knowledge`: 1-5 forum-sourced pitfalls or facts with source links, only what
-  docs miss
-- `decision`: adopt / fork-extend / build-from-scratch, with one-line evidence
-- `next_action`: single concrete next step (clone, scaffold, or further research)
-- Final report is SHORT: bullet list, no essays, no repeated tool output
+**理解门槛（先于每一轮）**：用户的话/提示词没看懂、有歧义或含陌生概念 → 两件事缺一不可：
+① WebFetch/WebSearch 至少搜一次（弄清真实核心需求）；② 直接问用户"核心需求是什么"。
+没搜 + 没问就动手 = 违规。
 
-### Dependencies
-- `gh` CLI authenticated (`gh auth status`); `curl` fallback to GitHub API
-- web search (web_search tool or curl to search engines: google / duckduckgo) for forums
-- Optional: `jq` for parsing gh/curl JSON
-- Optional: Obsidian vault（无人之境调研时整理知识图谱用）
-- DSH goal tools for long-running preflight objectives (create_goal/get_goal/update_goal)
-- External skill routing: `resources/skill-radar.md` —— 外部热门技能雷达；
-  需要专项能力时按分类 `npx skills add owner/repo` 引用专门 skill（只路由，不吸收代码）
+| # | 场景 | SDLC 阶段 | 要做的事 / 产出 |
+|---|------|-----------|-----------------|
+| 1 | **PREPARE** | 需求 | 复述目标为一行（目标 + 2-3 约束 + 验收），问 1-3 个澄清问题；大白话解释术语；模糊词先澄清（信条 2）；确认"先调研后编码"模式 |
+| 2 | **ACQUIRE**（信条 1） | 调研 | 种子词 → 3-5 近义词（中/英/行业黑话/上下位词）→ 每词 `gh search repos` → 去重；同时搜索引擎 + 论坛 `site:` 模糊大量搜索；`gh repo view` 查健康度/license |
+| 3 | **REASON**（信条 3） | 分析·设计 | 按 fit%/维护/license/社区打分，套 build-vs-buy 矩阵；≥2 备选 |
+| 4 | **EXPLORE**（信条 4） | 分析·设计 | 无现成实现时：a 先怀疑论文/硬件已证不可行；b 回 ACQUIRE 扩检（论文/专利/硬件规格/相似领域）；c 整理 md/Obsidian 知识图谱（概念-关系-证据）；d 仍无材料 → 报告"无人之境 + 无不可行证据"并标风险 |
+| 5 | **DEEP-DIVE**（信条 5） | 分析·设计 | 最小可运行 demo 验证可行性 → 跑通 → 模块化拼接；每步验证，避免一次性大工程 |
+| 6 | **WEIGH** | ROI 门槛 | 产出值（需求价值/补缺/可复用）÷ 投入本（工时/风险/验证）；**不过门槛不动工** → 缩方案或换题 |
+| 7 | **DECIDE / ACT** | 决策 + 开发·落地 | adopt / fork / build + 命名硬约束 + 代价；执行最小 clone/scaffold（深度开发 → skill-radar） |
+| 8 | **VERIFY / FINALIZE** | 验证 + 维护·迭代 | 每条结论有源（repo URL / 论坛 / 论文），需求仍被满足；交付 ≤12 行报告；未达验收 → 自动下一轮 |
 
-### Control-flow features
-- Loop: near-synonym search until evidence converges (2+ credible candidates OR 2
-  consecutive empty synonym rounds); 无人之境时扩大到搜索引擎 + 论文/硬件排查
-- Branch: adopt vs fork vs build decision gates the next action
-- Branch: 有先例 → 克隆研究实现；无先例 → 怀疑不可行 → 再调研 → 知识图谱 → 最小化验证
-- User clarification points: requirement must be agreed BEFORE any search/scaffold
-- Long-running objectives: register with create_goal, drive with goal rounds
-- Write behavior: no code, no scaffolding until the decision is recorded
+**决策规则（反 NIH，80% 规则）**：主流方案覆盖 ≥80% 需求 → 默认 adopt（克隆研究实现）；
+50-80% 或存在硬约束 → fork/extend；无候选 → EXPLORE。自研必须写明被哪条硬约束逼的
+（license / 性能 / 离线 / 安全）。
 
-## Structural Flow
+**循环规则**：前端重、后端轻；可逆动作 70% 置信度即行动，不可逆/高风险必须等用户确认；
+行动后必须重新观察，不停在"好像完成了"；验证未过从新事实重新观察，不修旧结论。
+每轮提示词模板与 SDLC 速查见 `resources/sdlc-guidance.md`。
 
-### Entry
-1. Restate the user's goal in one sentence and list the top 2-3 constraints/acceptance
-   criteria; ask 1-3 clarifying questions if any ambiguity blocks the requirement.
-2. **理解用户（信条 2）**：提问必须完整、准确、简单扼要；发现模糊指代（"这里/这样"）
-   时，若自己无识图/相关能力就**明确承认**，并提示"将先执行同类经验汲取获取相关工具"，
-   再让用户确认方向。
-3. Confirm "research first" mode: no implementation before the decision step.
-
-### Scenes
-1. **PREPARE**: Nail the requirement. Ask until goal + constraints + acceptance fit on
-   one line. 用户不懂术语时用大白话解释；模糊词必须先澄清。If the objective is
-   long-running, create a goal. Do NOT let the user (or yourself) jump to code.
-2. **ACQUIRE (信条 1)**: 默认知识库落后。Run the gh CLI near-synonym search loop (see
-   `resources/preflight-search.md` for exact commands): seed term -> 3-5 synonyms
-   (中文/English/行业黑话/上下位词) -> `gh search repos` per term -> dedupe -> pick
-   top candidates. 同时用搜索引擎（google / duckduckgo）和论坛（Reddit / Stack
-   Overflow / 吾爱破解 / HN）做**模糊大量搜索**获取充足调研。
-3. **REASON (信条 3)**: Score candidates against the requirement (fit %, maintenance,
-   license, community). Apply the build-vs-buy matrix. If a mainstream option covers
-   >= 80% of the requirement, it wins by default —— **不要自己埋头研究，去克隆他人的
-   想法并研究具体实现**。
-4. **EXPLORE (信条 4, 无人之境)**: 当确定方向是无人之境（无现成实现）：
-   a. **首先怀疑**这条路已在论文或硬件中被证明不可行；
-   b. 回到 ACQUIRE 扩大检索（论文/专利/硬件规格/相似领域），寻找"不可行"证据或蛛丝马迹；
-   c. 找到些许材料后，把所有模糊或相似文件整理为 **md / Obsidian 知识图谱**（概念-关系-证据），
-      结构化后再进入深度研究；
-   d. 若彻底找不到材料，明确报告"无人之境 + 无不可行证据"，标注风险再继续。
-5. **DEEP-DIVE (信条 5, 深度研究)**: 目标是**低投入高收益**地获取前沿探索知识：
-   a. 任何代码/文字/图片输出先满足**最小化验证可行性**（最小可运行 demo，不追求完整）；
-   b. 不懂一个东西的实现 → 写最小化实现 → 跑通 → 再**模块化拼接**、由简入繁；
-   c. 相信**原子化构建**：复杂系统由基本单元组合，先建单元再组合；
-   d. 每步验证可行性，避免一次性大工程。
-6. **ACT**: Execute the decision — clone the chosen repo for inspection, or scaffold the
-   project skeleton (最小化). Keep it minimal; this skill's job ends at a verified start.
-7. **VERIFY**: Every claim in the report has a source (repo URL / forum thread / 论文).
-   Requirement is still satisfied by the decision. No hallucinated projects.
-8. **FINALIZE**: Deliver the short bullet report: requirement / candidates / niche
-   knowledge / decision / next action. ≤ 12 lines of substance.
-
-### 软件开发组合 (SDLC Workflow)
-
-当用户提到 **软件开发组合 / SDLC / 生命周期 / 需求-开发-维护** 时，切换到 SDLC
-模式：把 lyco 的预研流程当作一条软件开发生命周期闭环来跑。lyco 重仓前端
-（需求→调研→设计→ROI→决策→落地验证），**开发/测试/部署/维护**走 `skill-radar`
-路由给专家技能（oma-backend/oma-debug 等），lyco 只做轻量落地与反馈驱动。
-
-**阶段映射（SDLC 组合）**
-
-| SDLC 阶段 | lyco 场景 | 核心产出 |
-|----------|----------|----------|
-| 需求 Requirement | PREPARE | 一行需求 + 验收标准（理解门槛过） |
-| 调研 Research | ACQUIRE | 候选清单 + niche 知识 + 源 |
-| 分析·设计 Analysis & Design | REASON / EXPLORE / DEEP-DIVE | fit 矩阵 + ≥2 备选 + 知识图谱 |
-| ROI 评估（R 门槛） | (WEIGH) | 产出值(需求价值/补缺/可复用) ÷ 投入本(工时/风险/验证)；不过→缩方案或换题 |
-| 决策 Decision | DECIDE | adopt/fork/build + 命名硬约束 + 代价 |
-| 开发·落地 Dev(轻) | ACT | 最小 clone/scaffold（深度开发→skill-radar） |
-| 验证 Verify | VERIFY/FINALIZE | 每条结论有源 + ≤12 行报告 |
-| 维护·迭代 Maintain | → 下一轮 PREPARE | 反馈驱动下一轮（深度运维→skill-radar） |
-
-**循环核心**：前端重、后端轻 —— 预研重仓在需求到决策；可逆动作先求 70% 置信度
-就行动，不追求 100%；行动后必须重新观察，不能停在“好像完成了”。
-
-**每轮输出（SDLC 核心提示词）**
-
+**≤12 行报告格式**（只写实质内容，bullet，无长文、不贴工具输出）：
 ```text
-需求: 一行需求 + 验收标准 / 模糊词已澄清（理解门槛过）
-调研: gh+论坛检索 / 候选清单 + niche 知识 + 源
-分析·设计: fit 矩阵 / ≥2 备选 / 差距与先例
-ROI 权衡: 产出值(需求价值/补缺/可复用) ÷ 投入本(工时/风险/验证) / 过不过门槛 / 不过→缩方案或换题
-决策: adopt/fork/build + 理由 + 命名硬约束 + 代价
-开发·落地: 最小 clone/scaffold / 深度开发→skill-radar
-验证: 每条结论有源 / 需求仍被满足 / ≤12 行报告
-维护·迭代: 下一轮触发条件（继续 or 关闭）
+需求: <一行: 目标 + 关键约束 + 验收>
+候选: <owner/repo> ⭐<stars> <license> <url>  (top 1-3, 各标 fit %)
+冷门知识: <1-2 条文档缺失的事实，各带来源链接>
+决策: adopt / fork / build — <一行证据>
+下一步: <一个具体动作>
 ```
 
-**循环规则**：
-- 一轮 = 需求 → 调研 → 分析·设计 → ROI 评估 → 决策 → 开发·落地 → 验证 → 维护·迭代。
-- **理解门槛（先于一轮）**：若用户的话/提示词没看懂、有歧义或含陌生概念 → 强制两件事缺一不可：① WebFetch/WebSearch 至少搜一次同步信息（目的是弄清用户真实核心需求）；② 直接向用户提问“核心需求是什么”。没搜+没问就动手 = 违规。
-- 验证未达验收标准 → 自动进入下一轮，从新的事实重新观察，不修旧结论。
-- 可逆动作以 70% 置信度执行；不可逆或高风险动作必须等用户确认。
-- 完整提示词模板与检索速查见 `resources/sdlc-guidance.md`。
+## Transitions
+- 需求未确认用户就开始口述实现细节 → 停下，先重新确认一行需求。
+- 连续 2 轮近义词搜索无可信结果 → 记录"未找到公开同类项目"，进入 EXPLORE 再考虑自研。
+- 头部候选需快速体检（是否存活？license？）→ `gh repo view` / `gh api repos/owner/repo`。
+- 资料证明他人实现过 → 默认克隆研究实现（REASON → ACT），不重复造轮子。
+- 报告变长 → 只留最强候选，其余按需提供。
 
-### Transitions
-- If the user starts dictating implementation details before the requirement is agreed,
-  stop and re-confirm the one-line requirement first.
-- If 2 consecutive synonym rounds return nothing credible, record "no similar public
-  project found", then move to **EXPLORE**（无人之境流程）before self-building.
-- If the top candidate needs a quick sanity check (is it alive? license?), use
-  `gh repo view owner/repo` or `gh api repos/owner/repo` before deciding.
-- If 资料证明他人实现过 → 默认克隆研究实现（REASON → ACT），不重复造轮子。
-- If the report is getting long, cut to the strongest candidate only and offer the rest
-  on request.
-
-### Failure and recovery
+## Failure and recovery
 | Failure | Recovery |
 |---------|----------|
-| `gh` not authenticated | `gh auth login`; fallback to `curl` GitHub search API with a token or unauthenticated search |
-| Search results are irrelevant because the seed term is wrong | Expand to synonyms/上位词; ask the user for the domain's jargon; search in the ecosystem's package registry too (npm/pypi/crates) |
-| 搜索到材料但理解不了 | 整理成 md / Obsidian 知识图谱，拆解为最小单元逐个研究（信条 5） |
+| `gh` not authenticated | `gh auth login`; fallback to `curl` GitHub search API (token or unauthenticated) |
+| Seed term wrong → irrelevant results | Expand to synonyms/上位词; ask user for domain jargon; also search npm/pypi/crates |
+| 搜索到材料但理解不了 | 整理成 md / Obsidian 知识图谱，拆为最小单元逐个研究（信条 5） |
 | 方向像"无人之境" | 先怀疑已在论文/硬件中被证明不可行 → 扩大检索找证据 → 再决定 |
-| Forums require login or block scraping (e.g. 吾爱破解) | Use web_search with `site:52pojie.cn` instead of direct fetch; cite the thread URL, don't paste walled content |
-| User insists on building before researching (NIH bias) | Show the found candidate's evidence and ask: "this exists and covers X% — what constraint forces a rewrite?" |
-| User 用模糊词且你无识图能力 | 承认能力边界，提示先执行同类经验汲取获取工具，再确认方向；不要假装看懂 |
-| Decision paralysis between fork and build | Default to adopt/fork if any candidate covers ≥ 80%; self-build requires a named hard constraint (license/perf/offline/security) |
-| Report becomes a wall of text | Compress to bullets; per-item max ~1 line; move details into a follow-up offer |
+| Forums need login / block scraping (e.g. 吾爱破解) | web_search with `site:52pojie.cn`; cite thread URL, don't paste walled content |
+| User insists on building first (NIH bias) | Show evidence: "this exists and covers X% — what constraint forces a rewrite?" |
+| 用户用模糊词且你无识图能力 | 承认能力边界，提示先执行同类经验汲取获取工具，再确认方向；不假装看懂 |
+| Decision paralysis fork vs build | Any candidate ≥80% → adopt/fork; self-build needs a named hard constraint |
+| Optional skill/tool missing (oma-*, DSH goal) | 自行执行该步骤或跳过，在报告中注明；不阻塞流程 |
+| Report becomes a wall of text | Compress to bullets, ~1 line per item; offer details as follow-up |
 
-### Exit
-- Success: requirement line agreed; candidates researched with sources; decision made
-  with evidence; next action stated; report ≤ 12 lines.
-- Partial success: search done but user is still deciding — report findings and the
-  decision matrix, leave the decision open, no code written.
-- Failure: requirement could not be pinned down after clarification — report what is
-  ambiguous and stop; do not implement from a guess.
+## Exit
+- **Success**：一行需求已确认；候选带来源；决策有证据；下一步已给出；报告 ≤12 行。
+- **Partial**：调研完成但用户仍在决定 → 报告发现与决策矩阵，决策留空，不写代码。
+- **Failure**：澄清后仍钉不住需求 → 报告歧义点并停止；绝不凭猜测实现。
 
-## Logical Operations
-
-### Actions
-| Action | SSL primitive | Evidence |
-|--------|---------------|----------|
-| Restate requirement, ask clarifying questions（完整/准确/扼要） | `REQUEST` | User's answers in conversation |
-| 承认能力边界（无识图/不懂术语时） | `REQUEST` | 用户确认方向 |
-| gh CLI near-synonym + 模糊搜索 | `CALL_TOOL` | `gh search repos` / `gh search code` output |
-| 搜索引擎 + 论坛调研（google/ddg/reddit/SO/52pojie/HN） | `CALL_TOOL` | web_search with `site:` filters |
-| Inspect candidate health/license | `CALL_TOOL` | `gh repo view` / `gh api repos/...` |
-| 有先例 → 克隆研究实现（不埋头研究） | `CALL_TOOL` | clone + read source |
-| 无人之境 → 怀疑不可行 → 找证据 | `CALL_TOOL` | 论文/硬件/相似领域检索 |
-| 整理知识图谱（md / Obsidian） | `WRITE` | 概念-关系-证据 notes |
-| 最小化验证可行性 | `WRITE` | 最小可运行 demo |
-| Score candidates vs requirement | `COMPARE` | fit matrix in `resources/preflight-search.md` |
-| Decide build vs buy | `SELECT` | Decision matrix + named constraints |
-| Register long-running objective | `UPDATE_STATE` | create_goal/get_goal/update_goal |
-| Report verdict briefly | `NOTIFY` | Final bullet report |
-
-### Tools and instruments
-- `gh search repos "TERM" --limit N --sort stars` / `gh search code` / `gh api`
-- `gh repo view owner/repo` (stars, license, pushed_at)
-- `curl` GitHub API fallback
-- web_search tool: 搜索引擎（google / duckduckgo）+ `site:reddit.com` /
-  `site:stackoverflow.com` / `site:52pojie.cn` / `site:news.ycombinator.com`
-- `jq` for JSON parsing when needed
-- Obsidian vault / md notes（无人之境知识图谱）
-- Full command reference: `resources/preflight-search.md`
-
-### Canonical workflow path
-1. **Requirement (PREPARE)**: Restate goal in one line; ask 1-3 questions until
-   goal+constraints+acceptance fit one line; 模糊词先澄清、承认能力边界; if
-   long-running, create_goal.
-2. **Synonym loop (ACQUIRE-1)**: seed = goal's core verb+noun; expand to 3-5 synonyms;
-   for each: `gh search repos "synonym" --limit 15 --sort stars`; dedupe by
-   owner/repo; stop when 2+ credible candidates OR 2 empty rounds.
-3. **Wide net (ACQUIRE-2)**: 搜索引擎 + 论坛模糊大量搜索（google/ddg/reddit/SO/52pojie/HN），
-   收集文档缺失的 niche 知识与先例线索。
-4. **Inspect (ACQUIRE-3)**: `gh repo view owner/repo` for each top candidate — record
-   stars/license/last update; drop dead repos.
-5. **Decide (REASON)**: apply fit matrix; mainstream ≥ 80% -> adopt (克隆研究实现);
-   50-80% or hard constraint -> fork/extend; none -> 进入 EXPLORE。
-6. **Explore (EXPLORE)**: 无人之境 → 先怀疑论文/硬件已证不可行 → 扩大检索 →
-   整理 md/Obsidian 知识图谱 → 评估风险后进入最小化验证。
-7. **Minimal proof (DEEP-DIVE)**: 最小化实现验证可行性 → 模块化拼接由简入繁 → 原子化构建。
-8. **Act + Report (ACT/VERIFY/FINALIZE)**: clone or scaffold minimally; verify every
-   claim has a source; deliver ≤ 12-line bullet report (requirement / candidates /
-   niche knowledge / decision / next action).
-
-SDLC 模式下，步骤 2-8 即一轮循环：需求=Requirement，调研+分析=Research/Design，
-ROI 评估=门槛（不过不动工），决策=Decision，开发·落地+验证=Dev+Verify，维护·迭代
-驱动下一轮。
-
-### Resource scope
-| Scope | Resource target |
-|-------|-----------------|
-| `NETWORK` | GitHub API via gh/curl, 搜索引擎/论坛 via web_search |
-| `LOCAL_FS` | Scratch notes + Obsidian 知识图谱（无人之境）; no repo writes before decision |
-| `MEMORY` | Goal state when the preflight is long-running |
-| `CODEBASE` | Read-only inspection of cloned candidates (never modify) |
-
-### Preconditions
-- `gh` is authenticated or curl fallback works.
-- User agrees to research-before-code mode.
-- One-line requirement is agreed before searching or scaffolding.
-
-### Effects and side effects
-- Network calls to GitHub, search engines, and forum sites (read-only).
-- May clone candidate repos for inspection (local disk writes).
-- May write scratch md / Obsidian notes during EXPLORE/DEEP-DIVE.
-- May register/update a DSH goal for long-running preflight.
-- Does NOT write application code, scaffold, or modify the user's repo unless the
-  decision step explicitly says so.
-
-### Guardrails
-1. **No code before decision** — never scaffold or implement until the requirement line
-   and the build-vs-buy decision are recorded; this is the skill's whole point.
-2. **No hallucinated candidates** — every project in the report must come from an actual
-   `gh search`/`gh api` result with a URL; never invent a repo to fill the list.
-3. **Anti-NIH default (信条 3)** — if any mainstream option covers ≥ 80% of the
-   requirement, adopting it is the default; self-build requires a named hard constraint.
-   有先例就克隆研究，不埋头造轮子。
-4. **Forum knowledge is cited, not copied** — summarize with source links; never paste
-   walled/large forum content into the report; respect site terms.
-5. **CLI-first** — use gh/curl/web_search; avoid GUI browsing; keep every step
-   reproducible as a command.
-6. **Short output always** — bullet reports, ≤ 12 lines of substance; cut, don't pad;
-   the user values 简短扼要 over completeness.
-7. **License awareness** — flag license incompatibility (e.g. GPL in closed-source) in
-   the decision; it is a legitimate hard constraint for self-build.
-8. **Respect forum access barriers** — do not attempt login bypass or scraping
-   workarounds on login-walled forums; use site-filtered search results instead.
-9. **Admit capability boundaries (信条 2)** — 无识图/不懂就承认，并提示先执行
-   同类经验汲取获取工具；绝不假装看懂模糊指代。
-10. **Suspect dead ends first (信条 4)** — 无人之境方向先假设已在论文/硬件中被证明
-    不可行，找到证据或反例后再投入深度研究。
-11. **Minimal proof before depth (信条 5)** — 任何输出先满足最小化验证可行性；
-    不理解就写最小化实现，原子化构建，模块化拼接，避免一次性大工程。
+## Guardrails
+1. **No code before decision** — 一行需求与 build-vs-buy 决策记录前，不脚手架、不实现。
+2. **No hallucinated candidates** — 报告中每个项目都来自真实 `gh search`/`gh api` 结果并带 URL。
+3. **Anti-NIH default（信条 3）** — 主流方案 ≥80% 默认采用；有先例就克隆研究，不埋头造轮子。
+4. **Forum knowledge is cited, not copied** — 带来源总结，不粘贴墙内/大段内容，遵守站点条款。
+5. **CLI-first** — gh/curl/web_search，避免 GUI 浏览，每步可复现为命令。
+6. **Short output always** — ≤12 行实质内容；简短扼要优先于完整。
+7. **License awareness** — 标注 license 冲突（如闭源用 GPL），它是自研的合法硬约束。
+8. **Respect forum access barriers** — 不绕过登录墙、不做抓取变通，改用 `site:` 搜索结果。
+9. **Admit capability boundaries（信条 2）** — 无识图/不懂就承认，绝不假装看懂模糊指代。
+10. **Suspect dead ends first（信条 4）** — 无人之境先假设不可行，找到证据或反例再深入。
+11. **Minimal proof before depth（信条 5）** — 先最小化验证，原子化构建，模块化拼接。
 
 ## References
-- Command reference, synonym expansion rules, forum site list, fit matrix:
-  `resources/preflight-search.md`
-- 软件开发组合 SDLC：阶段映射、核心提示词模板、检索速查：
-  `resources/sdlc-guidance.md`
-- 外部技能雷达（资源路由，只引用不吸收；专项能力做 build-vs-buy 时查这里）：
-  `resources/skill-radar.md`
-- 五条核心信条（用户方法论）：同类经验汲取 / 理解用户 / 评估可行性 /
-  探索无人之境 / 深度研究（最小化验证 + 原子化构建）
+- `resources/preflight-search.md` — gh 命令速查、近义词扩展规则、论坛站点清单、fit / build-vs-buy 矩阵
+- `resources/sdlc-guidance.md` — SDLC 阶段映射、每轮提示词模板、各阶段检索速查（含 OODA 旧称对照）
+- `resources/workflow-reference.md` — 输入/输出字段、控制流、标准命令路径、SSL 动作映射、资源范围与副作用
+- `resources/skill-radar.md` — 外部技能雷达（只引用不吸收；专项能力做 build-vs-buy 时查这里）
